@@ -10,7 +10,9 @@ import retrofit.http.Path;
  */
 public interface SWApi {
     String endpoint = "http://swapi.co/api";
-
     @GET("/people/{id}/")
     rx.Observable<Character> getCharacter(@Path("id") int id);
+
+    @GET("/people/{id}/")
+    rx.Observable<String> getCharacter2(@Path("id") int id);
 }

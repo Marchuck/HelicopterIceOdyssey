@@ -3,6 +3,7 @@ package pl.marchuck.helicoptericeodyssey.dagger;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import pl.marchuck.helicoptericeodyssey.network.SWApi;
 import pl.marchuck.helicoptericeodyssey.ui.DaggerActivity;
 import pl.marchuck.helicoptericeodyssey.ui.MainActivity;
 
@@ -14,9 +15,16 @@ import pl.marchuck.helicoptericeodyssey.ui.MainActivity;
 @Component(modules = AppModule.class)
 @Singleton
 public interface AppComponent {
+//    CustomComponent nazwaBezZnaczenia(SecondModule userModule);
 
     MainActivity inject(MainActivity activity);
 
     DaggerActivity inject(DaggerActivity activity);
+
+    SWApi provideSwapi();
+
+    @Extra
+    SWApi provideExtraSwapi();
+
 
 }

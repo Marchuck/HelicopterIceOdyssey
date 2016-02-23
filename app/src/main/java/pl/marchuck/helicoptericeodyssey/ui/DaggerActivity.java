@@ -3,11 +3,11 @@ package pl.marchuck.helicoptericeodyssey.ui;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -41,14 +41,19 @@ public class DaggerActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 swapi.getCharacter(1)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action1<pl.marchuck.helicoptericeodyssey.model.Character>() {
                             @Override
-                            public void call(Character character) {
-                                Toast.makeText(DaggerActivity.this, "received "
-                                        + character.name, Toast.LENGTH_SHORT).show();
+                            public void call(final Character character) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Snackbar.make(view, "received " + character.name,
+                                                Snackbar.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         }, new Action1<Throwable>() {
                             @Override
