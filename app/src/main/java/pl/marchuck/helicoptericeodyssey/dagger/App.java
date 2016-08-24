@@ -3,6 +3,13 @@ package pl.marchuck.helicoptericeodyssey.dagger;
 import android.app.Application;
 import android.content.Context;
 
+import java.io.File;
+
+import io.rx_cache.internal.RxCache;
+import io.victoralbertos.jolyglot.GsonSpeaker;
+import pl.marchuck.helicoptericeodyssey.rxcache.Providers;
+import pl.marchuck.helicoptericeodyssey.rxcache.Repository;
+
 /**
  * Created by Łukasz Marczak
  *
@@ -10,24 +17,14 @@ import android.content.Context;
  */
 public class App extends Application {
 
-    private AppComponent component;
+    public Repository repository;
 
-    protected AppModule getApplicationModule() {
-        return new AppModule(this);
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        File cacheDir = getFilesDir();
+        repository = new Repository(cacheDir);
+
     }
 
-    public static AppComponent getAppComponent(Context context) {
-        App app = (App) context.getApplicationContext();
-        if (app.component == null) {
-            app.component = DaggerAppComponent.builder()
-                    .appModule(app.getApplicationModule())
-                    .build();
-        }
-        return app.component;
-    }
-
-    public static void clearAppComponent(Context context) {
-        App app = (App) context.getApplicationContext();
-        app.component = null;
-    }
 }

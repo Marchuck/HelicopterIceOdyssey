@@ -25,10 +25,14 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
 
-    apt 'com.google.dagger:dagger-compiler:2.0.2'
-    compile 'com.google.dagger:dagger:2.0.2'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
 
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
+
+    compile 'com.jakewharton:butterknife:8.2.1'
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+
+    compile "com.github.VictorAlbertos.RxCache:runtime:1.6.2"
+    compile 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
+    compile 'io.reactivex:rxjava:1.1.8'
 }
